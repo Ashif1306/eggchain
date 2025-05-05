@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EggChain - Monitoring Kesehatan</title>
+    <link rel="stylesheet" href="monitoring-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Mobile Menu Button -->
+        <button class="hamburger" id="hamburgerBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <!-- Mobile Header with User Profile -->
+        <div class="mobile-header">
+            <div class="mobile-user-profile">
+                <img src="user-avatar.jpg" alt="User Avatar" class="user-avatar">
+                <div class="user-info">
+                    <span class="user-name">Tam Tran</span>
+                    <span class="user-status">Free account</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Overlay for sidebar on mobile -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <!-- Close Menu Button for Mobile -->
+            <button class="close-menu" id="closeMenu">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- Logo -->
+            <div class="logo">
+                <img src="eggchain-logo.png" alt="EggChain Logo" class="logo-img">
+            </div>
+            
+            <!-- Admin Tools Section -->
+            <div class="admin-tools">
+                <span class="section-title">Admin tools</span>
+                
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item active">
+                        <i class="fas fa-th-large"></i>
+                        <span>Overview</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-box"></i>
+                        <span>Products</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Campaigns</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Schedules</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-wallet"></i>
+                        <span>Payouts</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Statement</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Insights Section -->
+            <div class="insights">
+                <span class="section-title">Insights</span>
+                
+                <nav class="nav-menu">
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Inbox</span>
+                        <span class="badge">18</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                        <span class="badge">2</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-comment"></i>
+                        <span>Comments</span>
+                        <span class="badge">20</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- User Profile - at bottom of sidebar -->
+            <div class="user-profile">
+                <img src="user-avatar.jpg" alt="User Avatar" class="user-avatar">
+                <div class="user-info">
+                    <span class="user-name">Tam Tran</span>
+                    <span class="user-status">Free account</span>
+                </div>
+            </div>
+        </aside>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <h1>Hi Mandiri Jaya Farm,</h1>
+                    <h2>Monitoring Kesehatan <span class="wave">👋</span></h2>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search">
+                    </div>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">2</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Navigation Tabs -->
+            <div class="nav-tabs">
+                <button class="tab active">
+                    <i class="fas fa-heartbeat"></i>
+                    Health Monitoring
+                </button>
+                <button class="tab">
+                    <i class="fas fa-chart-line"></i>
+                    Sales
+                </button>
+                <button class="tab">
+                    <i class="fas fa-eye"></i>
+                    Overview
+                </button>
+                <button class="tab">
+                    <i class="fas fa-egg"></i>
+                    Produksi
+                </button>
+            </div>
+            
+            <!-- Date Selector -->
+            <div class="date-selector">
+                <span>27 April 2025</span>
+            </div>
+            
+            <!-- Farm Information Card -->
+            <div class="info-card">
+                <div class="farm-info">
+                    <h3>Informasi Peternakan</h3>
+                    <div class="info-details">
+                        <div>
+                            <span>Peternakan mandiri jaya<br>ID : FARM123456</span>
+                        </div>
+                        <div>
+                            <span>Lokasi : Kota Makassar,<br>Sulawesi Selatan</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="coop-selector">
+                    <h3>Pilih Kandang</h3>
+                    <div class="coop-buttons">
+                        <button class="coop-btn active">COOP - A</button>
+                        <button class="coop-btn">COOP-B</button>
+                        <button class="coop-btn">COOP-C</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Health Status Section -->
+            <div class="health-status">
+                <h3>Status Kesehatan Keseluruhan</h3>
+                <div class="status-cards">
+                    <div class="status-card warning">
+                        <h4>Peringatan Aktif</h4>
+                        <p>Status : 2 Peringatan</p>
+                    </div>
+                    <div class="status-card success">
+                        <h4>Tingkat Kematian : 0%</h4>
+                        <p>Status : Produktif</p>
+                    </div>
+                    <div class="status-card info">
+                        <h4>Umur Flock : 224 Hari</h4>
+                        <p>Status : Produktif</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parameters Section -->
+            <!-- Parameters Section -->
+            <div class="parameters-section">
+                <div class="parameter-card">
+                    <h3>Parameter Lingkungan</h3>
+                    <div class="parameter-item">
+                        <span>Suhu Kandang :</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill green"></div>
+                                <span class="progress-text green">Optimal (24-28°C)</span>
+                            </div>
+                        </div>
+                        <span class="parameter-value">25.5°C</span>
+                    </div>
+                    <div class="parameter-item">
+                        <span>Kelembapan :</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill green"></div>
+                                <span class="progress-text green">Optimal (60-70%)</span>
+                            </div>
+                        </div>
+                        <span class="parameter-value">65%</span>
+                    </div>
+                    <div class="parameter-item">
+                        <span>Kadar Amonia :</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill red"></div>
+                                <span class="progress-text red">Diatas batas (10 ppm)</span>
+                            </div>
+                        </div>
+                        <span class="parameter-value">15ppm</span>
+                    </div>
+                    <div class="parameter-item">
+                        <span>Tingkat Kebisingan :</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill green"></div>
+                                <span class="progress-text green">Optimal (65dB)</span>
+                            </div>
+                        </div>
+                        <span class="parameter-value">45dB</span>
+                    </div>
+                    <div class="parameter-item">
+                        <span>Pencahayaan :</span>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill green"></div>
+                                <span class="progress-text green">Sesuai rekomendasi</span>
+                            </div>
+                        </div>
+                        <span class="parameter-value">16 Jam</span>
+                    </div>
+                </div>
+                
+                <div class="stress-index-card">
+                    <h3>Indeks Kesehatan & Stress</h3>
+                    <div class="health-indicators">
+                        <p>Kondisi Bulu : <span class="baik">Baik</span></p>
+                        <p>Kondisi Jengger : <span class="merah-terang">Merah Terang</span></p>
+                    </div>
+                    <div class="stress-gauge">
+                        <div class="gauge-chart">
+                            <div class="gauge-center">
+                                <div class="gauge-value">0.26</div>
+                                <div class="gauge-label">Stress Indeks</div>
+                            </div>
+                        </div>
+                        <div class="stress-levels">
+                            <div class="level">
+                                <div class="level-bar green"></div>
+                                <span>Low (0.1-0.15)</span>
+                            </div>
+                            <div class="level">
+                                <div class="level-bar yellow"></div>
+                                <span>Medium (0.16-0.30)</span>
+                            </div>
+                            <div class="level">
+                                <div class="level-bar red"></div>
+                                <span>High (>0.30)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Active Alerts Section -->
+            <div class="active-alerts">
+                <h3>Peringatan Kesehatan Aktif</h3>
+                <div class="alert-items">
+                    <div class="alert-item">
+                        <div class="alert-icon">!</div>
+                        <div class="alert-content">
+                            <h4>Kadar Amonia Tinggi</h4>
+                            <p>Terdeteksi 27 April 2025, 07:45</p>
+                        </div>
+                    </div>
+                    <div class="alert-item">
+                        <div class="alert-icon">!</div>
+                        <div class="alert-content">
+                            <h4>Tingkat Stress Meningkat</h4>
+                            <p>Terdeteksi 27 April 2025, 08:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- IoT Status Section -->
+            <div class="iot-status">
+                <p>Status : Tersambung dengan sensor IoT - 7 sensor aktif mengirimkan data</p>
+                <div class="iot-buttons">
+                    <button class="btn-primary">Kelola Sensor</button>
+                    <button class="btn-secondary">Riwayat Kesehatan</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="monitoring-script.js"></script>
+</body>
+</html>
