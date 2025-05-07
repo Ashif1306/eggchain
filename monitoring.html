@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EggChain - Monitoring Kesehatan</title>
-    <link rel="stylesheet" href="monitoring-style.css">
+    <title>EggChain - Analisis Kesehatan Peternakan</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="monitoring-style.css">
 </head>
 <body>
     <div class="dashboard-container">
@@ -18,7 +18,7 @@
         <!-- Mobile Header with User Profile -->
         <div class="mobile-header">
             <div class="mobile-user-profile">
-                <img src="user-avatar.jpg" alt="User Avatar" class="user-avatar">
+                <img src="img/user-avatar.jpg" alt="User Avatar" class="user-avatar">
                 <div class="user-info">
                     <span class="user-name">Tam Tran</span>
                     <span class="user-status">Free account</span>
@@ -38,7 +38,7 @@
             
             <!-- Logo -->
             <div class="logo">
-                <img src="eggchain-logo.png" alt="EggChain Logo" class="logo-img">
+                <img src="img/logo eggchain.png" alt="EggChain Logo" class="logo-img">
             </div>
             
             <!-- Admin Tools Section -->
@@ -46,9 +46,13 @@
                 <span class="section-title">Admin tools</span>
                 
                 <nav class="nav-menu">
-                    <a href="#" class="nav-item active">
+                    <a href="#" class="nav-item">
                         <i class="fas fa-th-large"></i>
                         <span>Overview</span>
+                    </a>
+                    <a href="#" class="nav-item active">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Analisis Kesehatan</span>
                     </a>
                     <a href="#" class="nav-item">
                         <i class="fas fa-box"></i>
@@ -102,7 +106,7 @@
             
             <!-- User Profile - at bottom of sidebar -->
             <div class="user-profile">
-                <img src="user-avatar.jpg" alt="User Avatar" class="user-avatar">
+                <img src="img/user-avatar.jpg" alt="User Avatar" class="user-avatar">
                 <div class="user-info">
                     <span class="user-name">Tam Tran</span>
                     <span class="user-status">Free account</span>
@@ -116,7 +120,7 @@
             <header class="header">
                 <div class="header-left">
                     <h1>Hi Mandiri Jaya Farm,</h1>
-                    <h2>Monitoring Kesehatan <span class="wave">👋</span></h2>
+                    <h2>Analisis Kesehatan Peternakan <span class="wave">👋</span></h2>
                 </div>
                 <div class="header-right">
                     <div class="search-bar">
@@ -134,7 +138,7 @@
             <div class="nav-tabs">
                 <button class="tab active">
                     <i class="fas fa-heartbeat"></i>
-                    Health Monitoring
+                    Analisis Kesehatan
                 </button>
                 <button class="tab">
                     <i class="fas fa-chart-line"></i>
@@ -178,152 +182,192 @@
                 </div>
             </div>
             
-            <!-- Health Status Section -->
-            <div class="health-status">
-                <h3>Status Kesehatan Keseluruhan</h3>
-                <div class="status-cards">
-                    <div class="status-card warning">
-                        <h4>Peringatan Aktif</h4>
-                        <p>Status : 2 Peringatan</p>
+            <!-- Input Form -->
+            <div class="input-form">
+                <h3>Data Input Analisis Kesehatan</h3>
+                <form id="healthAnalysisForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="temperature">Suhu Kandang (°C)</label>
+                            <input type="number" id="temperature" name="temperature" min="20" max="35" step="0.1" value="25.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="humidity">Kelembapan (%)</label>
+                            <input type="number" id="humidity" name="humidity" min="40" max="90" step="1" value="65" required>
+                        </div>
                     </div>
-                    <div class="status-card success">
-                        <h4>Tingkat Kematian : 0%</h4>
-                        <p>Status : Produktif</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ammonia">Kadar Amonia (ppm)</label>
+                            <input type="number" id="ammonia" name="ammonia" min="0" max="50" step="1" value="15" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="noise">Tingkat Kebisingan (dB)</label>
+                            <input type="number" id="noise" name="noise" min="30" max="90" step="1" value="45" required>
+                        </div>
                     </div>
-                    <div class="status-card info">
-                        <h4>Umur Flock : 224 Hari</h4>
-                        <p>Status : Produktif</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lighting">Durasi Pencahayaan (jam)</label>
+                            <input type="number" id="lighting" name="lighting" min="8" max="24" step="1" value="16" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="flockAge">Umur Flock (hari)</label>
+                            <input type="number" id="flockAge" name="flockAge" min="1" max="1000" step="1" value="224" required>
+                        </div>
                     </div>
-                </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="featherCondition">Kondisi Bulu</label>
+                            <select id="featherCondition" name="featherCondition" required>
+                                <option value="Sangat Baik">Sangat Baik</option>
+                                <option value="Baik" selected>Baik</option>
+                                <option value="Cukup">Cukup</option>
+                                <option value="Buruk">Buruk</option>
+                                <option value="Sangat Buruk">Sangat Buruk</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="combCondition">Kondisi Jengger</label>
+                            <select id="combCondition" name="combCondition" required>
+                                <option value="Sangat Merah">Sangat Merah</option>
+                                <option value="Merah Terang" selected>Merah Terang</option>
+                                <option value="Merah">Merah</option>
+                                <option value="Merah Pucat">Merah Pucat</option>
+                                <option value="Pucat">Pucat</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mortality">Tingkat Kematian (%)</label>
+                            <input type="number" id="mortality" name="mortality" min="0" max="100" step="0.01" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedConsumption">Konsumsi Pakan (g/ayam/hari)</label>
+                            <input type="number" id="feedConsumption" name="feedConsumption" min="50" max="200" step="0.1" value="110" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="waterConsumption">Konsumsi Air (ml/ayam/hari)</label>
+                            <input type="number" id="waterConsumption" name="waterConsumption" min="100" max="500" step="1" value="220" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eggProduction">Produksi Telur (%)</label>
+                            <input type="number" id="eggProduction" name="eggProduction" min="0" max="100" step="0.1" value="85.5" required>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-container">
+                        <button type="button" class="btn btn-secondary" id="resetBtn">Reset Data</button>
+                        <button type="button" class="btn btn-primary" id="analyzeBtn">Analisis Kesehatan</button>
+                    </div>
+                </form>
             </div>
             
-            <!-- Parameters Section -->
-            <div class="parameters-section">
-                <div class="parameter-card">
-                    <h3>Parameter Lingkungan</h3>
-                    <div class="parameter-item">
-                        <span>Suhu Kandang :</span>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill green"></div>
-                                <span class="progress-text green">Optimal (24-28°C)</span>
-                            </div>
-                        </div>
-                        <span class="parameter-value">25.5°C</span>
+            <!-- Results Section (initially hidden) -->
+            <div class="results-section" id="resultsSection">
+                <h3>Hasil Analisis Kesehatan</h3>
+                
+                <div class="result-card">
+                    <h4><span class="status-icon status-warning"></span> Indeks Kesehatan Keseluruhan</h4>
+                    <div class="result-details">
+                        <p>Skor Kesehatan: <strong>78/100</strong> (Kategori: <strong>Sedang</strong>)</p>
+                        <p>Ayam dalam kondisi kesehatan sedang dengan beberapa area yang perlu perhatian. Terdapat 2 parameter yang berada di luar range optimal.</p>
                     </div>
-                    <div class="parameter-item">
-                        <span>Kelembapan :</span>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill green"></div>
-                                <span class="progress-text green">Optimal (60-70%)</span>
-                            </div>
-                        </div>
-                        <span class="parameter-value">65%</span>
-                    </div>
-                    <div class="parameter-item">
-                        <span>Kadar Amonia :</span>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill red"></div>
-                                <span class="progress-text red">Diatas batas (10 ppm)</span>
-                            </div>
-                        </div>
-                        <span class="parameter-value">15ppm</span>
-                    </div>
-                    <div class="parameter-item">
-                        <span>Tingkat Kebisingan :</span>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill green"></div>
-                                <span class="progress-text green">Optimal (65dB)</span>
-                            </div>
-                        </div>
-                        <span class="parameter-value">45dB</span>
-                    </div>
-                    <div class="parameter-item">
-                        <span>Pencahayaan :</span>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill green"></div>
-                                <span class="progress-text green">Sesuai rekomendasi</span>
-                            </div>
-                        </div>
-                        <span class="parameter-value">16 Jam</span>
+                    <div class="recommendation">
+                        <p><strong>Rekomendasi:</strong> Perhatikan parameter yang menyimpang dari nilai optimal, terutama kadar amonia dan indeks stress yang meningkat. Tindakan perbaikan segera diperlukan untuk mencegah penurunan produktivitas.</p>
                     </div>
                 </div>
                 
-                <div class="stress-index-card">
-                    <h3>Indeks Kesehatan & Stress</h3>
-                    <div class="health-indicators">
-                        <p>Kondisi Bulu : <span class="baik">Baik</span></p>
-                        <p>Kondisi Jengger : <span class="merah-terang">Merah Terang</span></p>
+                <div class="result-card">
+                    <h4><span class="status-icon status-danger"></span> Kondisi Lingkungan</h4>
+                    <div class="result-details">
+                        <p>Skor Lingkungan: <strong>65/100</strong> (Kategori: <strong>Perlu Perhatian</strong>)</p>
+                        <p>Kadar amonia 15 ppm melebihi batas aman (10 ppm). Suhu, kelembaban, dan kebisingan dalam rentang normal.</p>
                     </div>
-                    <div class="stress-gauge">
-                        <div class="gauge-chart">
-                            <div class="gauge-center">
-                                <div class="gauge-value">0.26</div>
-                                <div class="gauge-label">Stress Indeks</div>
-                            </div>
-                        </div>
-                        <div class="stress-levels">
-                            <div class="level">
-                                <div class="level-bar green"></div>
-                                <span>Low (0.1-0.15)</span>
-                            </div>
-                            <div class="level">
-                                <div class="level-bar yellow"></div>
-                                <span>Medium (0.16-0.30)</span>
-                            </div>
-                            <div class="level">
-                                <div class="level-bar red"></div>
-                                <span>High (>0.30)</span>
-                            </div>
-                        </div>
+                    <div class="recommendation">
+                        <p><strong>Rekomendasi:</strong> Tingkatkan ventilasi kandang untuk mengurangi kadar amonia. Lakukan pembersihan lebih sering pada area kotoran ayam. Pertimbangkan penggunaan aditif pakan atau litter treatment untuk mengurangi produksi amonia.</p>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <h4><span class="status-icon status-warning"></span> Indeks Stress</h4>
+                    <div class="result-details">
+                        <p>Skor Stress: <strong>0.26</strong> (Kategori: <strong>Medium</strong>)</p>
+                        <p>Tingkat stress pada batas atas kategori medium. Kondisi jengger menunjukkan sirkulasi darah yang baik namun ada tanda-tanda stress ringan.</p>
+                    </div>
+                    <div class="recommendation">
+                        <p><strong>Rekomendasi:</strong> Periksa sumber stress seperti perubahan suhu tiba-tiba, kepadatan kandang, atau gangguan predator. Pastikan ayam memiliki akses ke tempat berteduh dan area beraktivitas. Pertimbangkan tambahan vitamin dan elektrolit dalam air minum untuk mengurangi stress.</p>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <h4><span class="status-icon status-healthy"></span> Produktivitas</h4>
+                    <div class="result-details">
+                        <p>Skor Produktivitas: <strong>92/100</strong> (Kategori: <strong>Sangat Baik</strong>)</p>
+                        <p>Produksi telur 85.5% berada di atas standar untuk ayam petelur usia 224 hari. Konsumsi pakan dan air dalam rentang normal.</p>
+                    </div>
+                    <div class="recommendation">
+                        <p><strong>Rekomendasi:</strong> Pertahankan kualitas pakan dan ketersediaan air. Pantau dengan cermat untuk memastikan produktivitas tetap tinggi. Lakukan penyesuaian pakan sesuai dengan kebutuhan nutrisi pada fase produksi ini.</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Trend Chart Section -->
-            <div class="trend-chart">
-                <h3>Tren Parameter Kesehatan (14 Hari Terakhir)</h3>
-                <div class="chart-container">
-                    <canvas id="healthChart"></canvas>
+            <!-- Chart Sections (initially hidden) -->
+            <div class="chart-section" id="chartSection">
+                <div class="chart-card">
+                    <h3>Tren Parameter Kesehatan</h3>
+                    <div class="chart-container">
+                        <canvas id="healthTrendsChart"></canvas>
+                    </div>
                 </div>
-                <div class="chart-legend">
-                    <span class="legend-item"><span class="line brown"></span> Suhu (°C)</span>
-                    <span class="legend-item"><span class="line yellow"></span> Amonia (ppm)</span>
-                    <span class="legend-item"><span class="line blue"></span> Stress Index</span>
+                
+                <div class="chart-card">
+                    <h3>Indeks Stress vs. Produktivitas</h3>
+                    <div class="chart-container">
+                        <canvas id="stressProductivityChart"></canvas>
+                    </div>
                 </div>
             </div>
             
-            <!-- Active Alerts Section -->
-            <div class="active-alerts">
-                <h3>Peringatan Kesehatan Aktif</h3>
-                <div class="alert-items">
-                    <div class="alert-item">
-                        <div class="alert-icon">!</div>
-                        <div class="alert-content">
-                            <h4>Kadar Amonia Tinggi</h4>
-                            <p>Terdeteksi 27 April 2025, 07:45</p>
-                        </div>
+            <!-- Prediction Section (initially hidden) -->
+            <div class="results-section" id="predictionSection">
+                <h3>Prediksi Kesehatan & Produktivitas</h3>
+                
+                <div class="result-card">
+                    <h4><span class="status-icon status-warning"></span> Prediksi 7 Hari Kedepan</h4>
+                    <div class="result-details">
+                        <p>Jika kondisi saat ini dipertahankan, indeks stress dapat meningkat hingga <strong>0.32</strong> dan produktivitas dapat menurun hingga <strong>82.1%</strong> dalam 7 hari ke depan.</p>
                     </div>
-                    <div class="alert-item">
-                        <div class="alert-icon">!</div>
-                        <div class="alert-content">
-                            <h4>Tingkat Stress Meningkat</h4>
-                            <p>Terdeteksi 27 April 2025, 08:00</p>
-                        </div>
+                    <div class="recommendation">
+                        <p><strong>Rekomendasi:</strong> Lakukan tindakan perbaikan untuk parameter kadar amonia dan stress segera. Model prediksi menunjukkan potensi kerugian produksi hingga 3.4% jika tidak ditangani.</p>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <h4><span class="status-icon status-healthy"></span> Potensi Optimalisasi</h4>
+                    <div class="result-details">
+                        <p>Dengan perbaikan pada ventilasi dan manajemen stress, produktivitas dapat ditingkatkan hingga <strong>88.2%</strong> dan skor kesehatan hingga <strong>85/100</strong>.</p>
+                    </div>
+                    <div class="recommendation">
+                        <p><strong>Rekomendasi:</strong> Implementasikan program manajemen ventilasi yang lebih baik dan penggunaan probiotik dalam pakan untuk hasil optimal. Estimasi ROI dari investasi perbaikan ini adalah 1:3.5 dalam 30 hari.</p>
                     </div>
                 </div>
             </div>
             
             <!-- IoT Status Section -->
             <div class="iot-status">
-                <p>Status : Tersambung dengan sensor IoT - 7 sensor aktif mengirimkan data</p>
+                <p>Status: Analisis berdasarkan data IoT - 7 sensor aktif mengirimkan data</p>
                 <div class="iot-buttons">
-                    <button class="btn-primary">Kelola Sensor</button>
-                    <button class="btn-secondary">Riwayat Kesehatan</button>
+                    <button class="btn-primary">Riwayat Analisis</button>
+                    <button class="btn-secondary">Unduh Laporan</button>
                 </div>
             </div>
         </main>
@@ -331,6 +375,7 @@
     
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="analisis-script.js"></script>
     <script src="monitoring-script.js"></script>
 </body>
 </html>

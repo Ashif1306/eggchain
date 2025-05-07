@@ -9,7 +9,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
     color: #333;
-    overflow-x: hidden; /* Prevent horizontal scrollbar */
+    overflow-x: hidden;
 }
 
 /* Dashboard Container */
@@ -115,7 +115,7 @@ body {
     padding: 15px;
     background-color: #ffffff;
     border-top: 1px solid #e5e7eb;
-    margin-top: auto; /* Push to bottom */
+    margin-top: auto;
 }
 
 .user-avatar {
@@ -144,7 +144,7 @@ body {
 .main-content {
     flex: 1;
     padding: 30px;
-    margin-left: 260px; /* Same as sidebar width */
+    margin-left: 260px;
     width: calc(100% - 260px);
     min-height: 100vh;
 }
@@ -333,250 +333,176 @@ body {
     border-color: #5046e5;
 }
 
-/* Health Status */
-.health-status {
-    margin-bottom: 25px;
-}
-
-.health-status h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #1f2937;
-}
-
-.status-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.status-card {
-    padding: 20px;
-    border-radius: 15px;
-    background-color: white;
-}
-
-.status-card h4 {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #1f2937;
-}
-
-.status-card p {
-    font-size: 14px;
-    color: #6b7280;
-}
-
-.status-card.warning {
-    background-color: #fff8eb;
-}
-
-.status-card.success {
-    background-color: #ecfdf5;
-}
-
-.status-card.info {
-    background-color: #f0f9ff;
-}
-
-/* Parameters Section */
-.parameters-section {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.parameter-card, .stress-index-card {
+/* Input Form Styles */
+.input-form {
     background-color: white;
     border-radius: 15px;
     padding: 25px;
+    margin-bottom: 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.parameter-card h3, .stress-index-card h3 {
+.input-form h3 {
     font-size: 18px;
     margin-bottom: 20px;
     color: #1f2937;
-    font-weight: 600;
 }
 
-/* Parameter Items - Revised to match the image */
-.parameter-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.parameter-item span:first-child {
-    width: 150px;
-    color: #6b7280;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.parameter-value {
-    width: 65px;
-    text-align: right;
-    font-weight: 600;
-    font-size: 15px;
-    color: #1f2937;
-}
-
-/* Progress Bar - Revised to match the image */
-.progress-bar-container {
-    flex: 1;
-    margin: 0 15px;
-}
-
-.progress-bar {
-    height: 22px;
-    border-radius: 6px;
-    background-color: #e5e7eb;
-    position: relative;
-    overflow: hidden;
-}
-
-.progress-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    border-radius: 6px;
-}
-
-.progress-fill.green {
-    background-color: #d1fae5;
-    width: 65%;
-}
-
-.progress-fill.red {
-    background-color: #fee2e2;
-    width: 65%;
-}
-
-.progress-text {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 12px;
-    z-index: 1;
-    white-space: nowrap;
-}
-
-.progress-text.green {
-    color: #059669;
-}
-
-.progress-text.red {
-    color: #dc2626;
-}
-
-/* Stress Index */
-.health-indicators {
-    display: flex;
-    justify-content: space-between;
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     margin-bottom: 20px;
 }
 
-.health-indicators p {
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4b5563;
     font-size: 14px;
-    color: #6b7280;
 }
 
-.baik {
-    color: #10b981;
-    font-weight: 600;
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1f2937;
+    transition: all 0.3s ease;
 }
 
-.merah-terang {
-    color: #f59e0b;
-    font-weight: 600;
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #5046e5;
+    box-shadow: 0 0 0 2px rgba(80, 70, 229, 0.1);
 }
 
-/* Gauge Chart */
-.stress-gauge {
-    margin-top: 25px;
-    position: relative;
-}
-
-.gauge-chart {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #f3f4f6;
-    position: relative;
-    margin: 0 auto 30px;
+.btn-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border: 10px solid #f3f4f6;
-    border-top-color: #f59e0b;
-    border-right-color: #f59e0b;
-    transform: rotate(45deg);
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 25px;
 }
 
-.gauge-center {
-    transform: rotate(-45deg);
-    text-align: center;
+.btn {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.gauge-value {
-    font-size: 24px;
-    font-weight: 700;
+.btn-primary {
+    background-color: #5046e5;
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: #5046e5;
+    border: 1px solid #5046e5;
+}
+
+.btn-primary:hover {
+    background-color: #4338ca;
+}
+
+.btn-secondary:hover {
+    background-color: #f9fafb;
+}
+
+/* Results Section */
+.results-section {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: none; /* Hidden by default */
+}
+
+.results-section h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
     color: #1f2937;
 }
 
-.gauge-label {
-    font-size: 12px;
-    color: #6b7280;
+.result-card {
+    background-color: #f9fafb;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-/* Stress Levels */
-.stress-levels {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.level {
+.result-card h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #1f2937;
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
-    color: #6b7280;
 }
 
-.level-bar {
-    width: 120px;
-    height: 5px;
-    border-radius: 3px;
+.status-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
-.level-bar.green {
+.status-healthy {
     background-color: #10b981;
 }
 
-.level-bar.yellow {
+.status-warning {
     background-color: #f59e0b;
 }
 
-.level-bar.red {
+.status-danger {
     background-color: #ef4444;
 }
 
-/* Trend Chart */
-.trend-chart {
+.result-details {
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.recommendation {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #ecfdf5;
+    border-radius: 8px;
+    color: #065f46;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Chart Sections */
+.chart-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+    display: none; /* Hidden by default */
+}
+
+.chart-card {
     background-color: white;
     border-radius: 15px;
     padding: 25px;
-    margin-bottom: 25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.trend-chart h3 {
+.chart-card h3 {
     font-size: 18px;
     margin-bottom: 20px;
     color: #1f2937;
@@ -584,96 +510,10 @@ body {
 
 .chart-container {
     height: 300px;
-    margin-bottom: 20px;
+    position: relative;
 }
 
-.chart-legend {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-}
-
-.chart-legend .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #6b7280;
-}
-
-.line {
-    width: 30px;
-    height: 3px;
-    display: inline-block;
-}
-
-.line.brown {
-    background-color: #92400e;
-}
-
-.line.yellow {
-    background-color: #eab308;
-}
-
-.line.blue {
-    background-color: #3b82f6;
-}
-
-/* Active Alerts */
-.active-alerts {
-    background-color: #fff8eb;
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 25px;
-}
-
-.active-alerts h3 {
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #1f2937;
-}
-
-.alert-items {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.alert-item {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    padding: 15px 20px;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.alert-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #fbbf24;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 20px;
-    margin-right: 15px;
-}
-
-.alert-content h4 {
-    font-size: 16px;
-    margin-bottom: 5px;
-    color: #1f2937;
-}
-
-.alert-content p {
-    font-size: 13px;
-    color: #6b7280;
-}
-
-/* IoT Status */
+/* IoT Status Section */
 .iot-status {
     background-color: #ecfdf5;
     border-radius: 15px;
@@ -786,24 +626,18 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .parameters-section {
+    .form-row {
         grid-template-columns: 1fr;
     }
     
-    .info-card {
+    .chart-section {
         grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 992px) {
-    .status-cards {
+    .info-card {
         grid-template-columns: 1fr;
-    }
-    
-    .chart-legend {
-        flex-wrap: wrap;
-        gap: 15px;
-        justify-content: flex-start;
     }
 }
 
@@ -892,61 +726,13 @@ body {
         padding: 10px 15px;
     }
     
-    /* Parameter adjustments for mobile - exact match to image */
-    .parameter-item {
+    .btn-container {
         flex-direction: column;
-        align-items: flex-start;
-        border-bottom: 1px solid #f0f0f0;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-    }
-    
-    .parameter-item:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-    
-    .parameter-item span:first-child {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    
-    .parameter-value {
-        width: auto;
-        margin-top: 10px;
-        font-size: 18px;
-    }
-    
-    .progress-bar-container {
-        width: 100%;
-        margin: 0;
-    }
-    
-    .progress-bar {
         width: 100%;
     }
     
-    /* IoT status for mobile */
-    .iot-status {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    
-    .iot-buttons {
+    .btn {
         width: 100%;
-        justify-content: center;
-    }
-    
-    /* Stress gauge for mobile */
-    .health-indicators {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .gauge-chart {
-        width: 120px;
-        height: 120px;
     }
 }
 
@@ -979,14 +765,5 @@ body {
     .coop-btn {
         flex: 1 1 100%;
         margin-bottom: 10px;
-    }
-    
-    .btn-primary, .btn-secondary {
-        width: 100%;
-        margin-top: 10px;
-    }
-    
-    .iot-buttons {
-        flex-direction: column;
     }
 }
