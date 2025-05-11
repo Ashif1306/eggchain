@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="monitoring-style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -181,7 +182,46 @@
                     </div>
                 </div>
             </div>
-            
+                        <!-- Tambahkan ini di bagian atas input form, sebelum form input lainnya -->
+            <div class="csv-import-section">
+                <h3>Import Data</h3>
+                <p>Upload file CSV dengan data kesehatan peternakan atau isi form secara manual.</p>
+                
+                <div class="csv-upload">
+                    <label for="csvFile" class="csv-upload-label">
+                        <i class="fas fa-file-csv"></i>
+                        <span>Pilih File CSV</span>
+                    </label>
+                    <input type="file" id="csvFile" accept=".csv" style="display:none;">
+                    <span id="fileName" class="file-name">Belum ada file yang dipilih</span>
+                </div>
+                
+                <div class="csv-template">
+                    <a href="#" id="downloadTemplate" class="download-template">
+                        <i class="fas fa-download"></i>
+                        Download Template CSV
+                    </a>
+                    <button type="button" class="btn btn-secondary btn-sm" id="previewDataBtn" disabled>
+                        <i class="fas fa-eye"></i>
+                        Preview Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview Modal -->
+            <div id="previewModal" class="preview-modal">
+                <div class="preview-content">
+                    <span class="close-preview">&times;</span>
+                    <h4>Preview Data CSV</h4>
+                    <div class="preview-table-container">
+                        <table id="previewTable" class="preview-table"></table>
+                    </div>
+                    <div class="preview-actions">
+                        <button type="button" class="btn btn-secondary" id="closePreviewBtn">Tutup</button>
+                        <button type="button" class="btn btn-primary" id="importDataBtn">Import Data</button>
+                    </div>
+                </div>
+            </div>
             <!-- Input Form -->
             <div class="input-form">
                 <h3>Data Input Analisis Kesehatan</h3>
@@ -375,7 +415,10 @@
     
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="analisis-script.js"></script>
-    <script src="monitoring-script.js"></script>
+    <script src="hasilanalisis.js"></script>
+    <script src="monitoringg.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 </body>
 </html>
