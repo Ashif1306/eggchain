@@ -89,6 +89,7 @@ console.log = function(message) {
     }
     
     // ===== IMPLEMENTASI MODEL MACHINE LEARNING KOMPREHENSIF =====
+    
     class IntegratedAnalysisModel {
         constructor() {
             // Inisialisasi matriks bobot untuk machine learning model
@@ -149,37 +150,49 @@ console.log = function(message) {
         analyze(inputs) {
             // Normalisasi input untuk machine learning
             const normalizedInputs = this.normalizeInputs(inputs);
-            
-            // Kalkulasi stress index berdasarkan algoritma
+
+            // Kalkulasi stress index berdasarkan bobot dari parameter relevan
             const stressIndex = this.calculateStressIndex(normalizedInputs);
-            
-            // Analisis kesehatan dengan metode random forest (simulasi)
+
+            // Analisis skor kesehatan dari berbagai aspek
             const healthScores = this.randomForestHealthAnalysis(normalizedInputs, stressIndex);
-            
-            // Prediksi menggunakan model regresi (simulasi)
+
+            // Prediksi metrik penting ke depan: produksi, ROI, risiko kematian, laba harian
             const predictions = this.predictFutureMetrics(normalizedInputs, stressIndex, healthScores);
-            
-            // Kalkulasi parameter interaksi menggunakan metode principal component analysis (simulasi)
+
+            // Hitung interaksi antar parameter menggunakan PCA atau korelasi lintas fitur
             const interactions = this.calculateParameterInteractions(normalizedInputs);
-            
-            // Generasi rekomendasi menggunakan decision tree
+
+            // Buat rekomendasi tindakan berdasarkan kondisi saat ini
             const recommendations = this.generateMachineLearningRecommendations(
-                normalizedInputs, 
-                stressIndex, 
-                healthScores, 
+                normalizedInputs,
+                stressIndex,
+                healthScores,
                 interactions
             );
-            
-            // Return hasil analisis komprehensif
+
+            // Kembalikan hasil komprehensif sebagai satu paket
             return {
-                stressIndex: stressIndex,
-                healthScores: healthScores,
-                predictions: predictions,
+                stressIndex: parseFloat(stressIndex.toFixed(2)),
+                healthScores: {
+                    environmentalScore: Math.round(healthScores.environmentalScore),
+                    welfareScore: Math.round(healthScores.welfareScore),
+                    productivityScore: Math.round(healthScores.productivityScore),
+                    feedEfficiencyScore: Math.round(healthScores.feedEfficiencyScore),
+                    eggQualityScore: Math.round(healthScores.eggQualityScore),
+                    healthIndex: Math.round(healthScores.healthIndex)
+                },
+                predictions: {
+                    nextWeekProduction: parseFloat(predictions.nextWeekProduction.toFixed(2)),
+                    mortalityRisk: predictions.mortalityRisk,
+                    returnOnInvestment: parseFloat(predictions.returnOnInvestment.toFixed(2)),
+                    predictedDailyProfit: Math.round(predictions.predictedDailyProfit)
+                },
                 interactions: interactions,
                 recommendations: recommendations
             };
         }
-        
+  
         // Normalisasi input untuk model ML
         normalizeInputs(inputs) {
             return {
@@ -2066,614 +2079,238 @@ console.log = function(message) {
     initialize();
 });
 
-// Inisialisasi grafik analisis komprehensif
-function initializeComprehensiveAnalysisCharts(analysis, inputs) {
-    // 1. Grafik radar untuk skor kesehatan komprehensif
-    const radarCtx = document.getElementById('healthRadarChart');
-    if (!radarCtx) return;
-    
-    try {
-        new Chart(radarCtx.getContext('2d'), {
-            type: 'radar',
-            data: {
-                labels: ['Lingkungan', 'Kesejahteraan', 'Produktivitas', 'Efisiensi Pakan', 'Kualitas Telur', 'Kesehatan'],
-                datasets: [{
-                    label: 'Skor Aktual',
-                    data: [
-                        analysis.environmentalScore,
-                        analysis.welfareScore,
-                        analysis.productivityScore,
-                        analysis.feedEfficiencyScore,
-                        analysis.eggQualityScore,
-                        analysis.healthIndex
-                    ],
-                    backgroundColor: 'rgba(80, 70, 229, 0.2)',
-                    borderColor: 'rgba(80, 70, 229, 1)',
-                    pointBackgroundColor: 'rgba(80, 70, 229, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(80, 70, 229, 1)'
-                }, {
-                    label: 'Target Optimal',
-                    data: [90, 90, 90, 90, 90, 90],
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    borderColor: 'rgba(16, 185, 129, 0.8)',
-                    borderDash: [5, 5],
-                    pointBackgroundColor: 'rgba(16, 185, 129, 0.8)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(16, 185, 129, 1)'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    r: {
-                        angleLines: {
-                            display: true
-                        },
-                        suggestedMin: 0,
-                        suggestedMax: 100
-                    }
-                },
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.dataset.label + ': ' + context.raw + '/100';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    } catch (error) {
-        console.error('Error initializing health radar chart:', error);
-    }
-    
-    // 2. Grafik prediksi produksi & ROI
-    const predictionCtx = document.getElementById('predictionChart');
-    if (!predictionCtx) return;
-    
-    // Data historis dari minggu-minggu sebelumnya
-    const predictionLabels = ['3 Minggu Lalu', '2 Minggu Lalu', '1 Minggu Lalu', 'Saat Ini', 'Prediksi'];
-    
-    // Data historis (mengambil dari data yang telah ada)
-    const historicalEggProduction = [];
-    for (let i = historicalData.eggProduction.length - 3; i < historicalData.eggProduction.length; i++) {
-        if (i >= 0) {
-            historicalEggProduction.push(historicalData.eggProduction[i]);
-        } else {
-            // Data dummy jika tidak cukup data historis
-            historicalEggProduction.push(inputs.eggProduction + (Math.random() * 2 - 1));
-        }
-    }
-    
-    // Tambahkan produksi saat ini dan prediksi
-    const predictionData = [
-        ...historicalEggProduction,
-        inputs.eggProduction,
-        analysis.productivityScore * 0.9 // Estimasi produksi berdasarkan skor produktivitas
-    ];
-    
-    try {
-        new Chart(predictionCtx.getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: predictionLabels,
-                datasets: [{
-                    label: 'Produksi Telur (%)',
-                    data: predictionData,
-                    borderColor: '#eab308',
-                    backgroundColor: 'rgba(234, 179, 8, 0.1)',
-                    tension: 0.3,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        min: Math.min(...predictionData) - 5,
-                        max: Math.max(...predictionData) + 5,
-                        title: {
-                            display: true,
-                            text: 'Produksi Telur (%)'
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true
-                    }
-                }
-            }
-        });
-    } catch (error) {
-        console.error('Error initializing prediction chart:', error);
-    }
-    
-    // 3. Grafik korelasi amonia vs stress
-    const correlationCtx = document.getElementById('correlationChart');
-    if (!correlationCtx) return;
-    
-    const correlationData = [];
-    for (let i = 0; i < historicalData.ammonia.length; i++) {
-        correlationData.push({
-            x: historicalData.ammonia[i],
-            y: historicalData.stressIndex[i]
-        });
-    }
-    
-    // Tambahkan data saat ini
-    correlationData.push({
-        x: inputs.ammonia,
-        y: analysis.stressIndex || 0.26
-    });
-    
-    try {
-        new Chart(correlationCtx.getContext('2d'), {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: 'Ammonia vs Stress Index',
-                    data: correlationData,
-                    backgroundColor: 'rgba(239, 68, 68, 0.7)',
-                    borderColor: 'rgba(239, 68, 68, 1)',
-                    borderWidth: 1,
-                    pointRadius: 6,
-                    pointHoverRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Kadar Amonia (ppm)'
-                        },
-                        min: 0,
-                        max: Math.max(...historicalData.ammonia, inputs.ammonia) + 5
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Stress Index'
-                        },
-                        min: 0,
-                        max: 0.5
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return `Amonia: ${context.raw.x} ppm, Stress: ${context.raw.y}`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    } catch (error) {
-        console.error('Error initializing correlation chart:', error);
-    }
-    
-    // 4. Grafik analisis ekonomi
-    const economicCtx = document.getElementById('economicChart');
-    if (!economicCtx) return;
-    
-    // Hitung data ekonomi untuk grafik
-    const feedCost = (inputs.feedConsumption / 1000) * 8000; // Rp per ayam per hari
-    const eggRevenue = (inputs.eggProduction / 100) * 0.06 * 25000; // Rp per ayam per hari
-    const otherCosts = 500; // Rp per ayam per hari
-    const profit = eggRevenue - feedCost - otherCosts;
-    
-    try {
-        new Chart(economicCtx.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: ['Pendapatan Telur', 'Biaya Pakan', 'Biaya Lainnya', 'Profit'],
-                datasets: [{
-                    label: 'Rp per Ayam per Hari',
-                    data: [eggRevenue, -feedCost, -otherCosts, profit],
-                    backgroundColor: [
-                        'rgba(16, 185, 129, 0.6)',
-                        'rgba(239, 68, 68, 0.6)',
-                        'rgba(234, 179, 8, 0.6)',
-                        profit > 0 ? 'rgba(16, 185, 129, 0.6)' : 'rgba(239, 68, 68, 0.6)'
-                    ],
-                    borderColor: [
-                        'rgba(16, 185, 129, 1)',
-                        'rgba(239, 68, 68, 1)',
-                        'rgba(234, 179, 8, 1)',
-                        profit > 0 ? 'rgba(16, 185, 129, 1)' : 'rgba(239, 68, 68, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Rupiah'
-                        }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                const value = context.raw;
-                                return `Rp${Math.abs(value).toLocaleString('id-ID')} per ayam/hari`;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    } catch (error) {
-        console.error('Error initializing economic chart:', error);
-    }
+// EggChain - Halaman Analisis Komprehensif (HTML + CSS + JS dalam satu file)
+
+// Buat elemen wrapper baru tanpa menimpa seluruh body
+const analysisWrapper = document.createElement('section');
+analysisWrapper.className = 'advanced-analysis-section';
+analysisWrapper.innerHTML = `
+  <h3>Analisis Komprehensif</h3>
+  <div class="analysis-charts">
+    <div class="chart-container">
+      <canvas id="healthRadarChart"></canvas>
+      <h4>Skor Kesehatan Multi-Aspek</h4>
+    </div>
+    <div class="chart-container">
+      <canvas id="predictionChart"></canvas>
+      <h4>Tren & Prediksi Produksi</h4>
+    </div>
+  </div>
+  <div class="analysis-charts">
+    <div class="chart-container">
+      <canvas id="correlationChart"></canvas>
+      <h4>Korelasi Amonia vs Stress</h4>
+    </div>
+    <div class="chart-container">
+      <canvas id="economicChart"></canvas>
+      <h4>Analisis Ekonomi</h4>
+    </div>
+  </div>
+`;
+
+// Sisipkan ke dalam halaman (misalnya setelah .main-content atau body jika tidak ditemukan)
+const mainContainer = document.querySelector('.main-content') || document.body;
+mainContainer.appendChild(analysisWrapper);
+function getFormInputs() {
+  return {
+    temperature: parseFloat(document.getElementById('temperature')?.value || 25.5),
+    humidity: parseFloat(document.getElementById('humidity')?.value || 65),
+    ammonia: parseFloat(document.getElementById('ammonia')?.value || 15),
+    feedConsumption: parseFloat(document.getElementById('feedConsumption')?.value || 110),
+    waterConsumption: parseFloat(document.getElementById('waterConsumption')?.value || 220),
+    eggProduction: parseFloat(document.getElementById('eggProduction')?.value || 85.5),
+    flockAge: parseFloat(document.getElementById('flockAge')?.value || 224)
+  };
 }
 
-function addAdvancedStyles() {
-    const advancedAnalysisStyles = `
-        /* Styles untuk advanced analysis */
-        .advanced-analysis-section {
-            background-color: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+// Tambahkan CSS secara dinamis
+const styleElement = document.createElement('style');
+styleElement.textContent = `
+  .advanced-analysis-section {
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .analysis-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .chart-container {
+    background-color: #f9fafb;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    height: 350px;
+    position: relative;
+  }
+  .chart-container h4 {
+    text-align: center;
+    font-size: 14px;
+    color: #4b5563;
+    margin-top: 10px;
+  }
+  canvas {
+    width: 100% !important;
+    height: 250px !important;
+  }
+  @media (max-width: 768px) {
+    .analysis-charts {
+      grid-template-columns: 1fr;
+    }
+  }
+`;
+document.head.appendChild(styleElement);
+
+// Data simulasi input pengguna dan hasil analisis
+const inputs = getFormInputs();
+
+const analysis = {
+  environmentalScore: 70 - (inputs.ammonia - 10) * 2,
+  birdWelfareScore: 75 - (inputs.flockAge > 350 ? 10 : 0),
+  productivityScore: Math.min(100, inputs.eggProduction),
+  healthIndex: 80,
+  predictions: {
+    nextWeekProduction: Math.max(0, inputs.eggProduction - (inputs.ammonia > 15 ? 3 : 1))
+  }
+};
+
+
+const historicalData = {
+  eggProduction: [87.5, 86.2, 85.8, 85.5],
+  ammonia: [8, 10, 12, 15],
+  stressIndex: [0.12, 0.18, 0.22, 0.26]
+};
+
+function renderComprehensiveAnalysisCharts() {
+  // Radar Chart
+  new Chart(document.getElementById('healthRadarChart').getContext('2d'), {
+    type: 'radar',
+    data: {
+      labels: ['Lingkungan', 'Kesejahteraan', 'Produktivitas', 'Efisiensi Pakan', 'Kualitas Telur', 'Kesehatan'],
+      datasets: [{
+        label: 'Skor Aktual',
+        data: [analysis.environmentalScore, analysis.birdWelfareScore, analysis.productivityScore, 78, 82, analysis.healthIndex],
+        backgroundColor: 'rgba(80, 70, 229, 0.2)',
+        borderColor: 'rgba(80, 70, 229, 1)',
+        pointBackgroundColor: 'rgba(80, 70, 229, 1)'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          suggestedMin: 0,
+          suggestedMax: 100
         }
-        
-        .advanced-analysis-section h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #1f2937;
+      }
+    }
+  });
+
+  // Line Chart for Prediction
+  new Chart(document.getElementById('predictionChart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: ['3 Minggu Lalu', '2 Minggu Lalu', '1 Minggu Lalu', 'Saat Ini', 'Prediksi'],
+      datasets: [{
+        label: 'Produksi Telur (%)',
+        data: [...historicalData.eggProduction, inputs.eggProduction, analysis.predictions.nextWeekProduction],
+        borderColor: '#eab308',
+        backgroundColor: 'rgba(234, 179, 8, 0.1)',
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: false
         }
-        
-        .analysis-charts {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+      }
+    }
+  });
+
+  // Scatter Chart for Correlation
+  const scatterData = historicalData.ammonia.map((x, i) => ({ x, y: historicalData.stressIndex[i] }));
+  scatterData.push({ x: inputs.ammonia, y: 0.26 });
+
+  new Chart(document.getElementById('correlationChart').getContext('2d'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Amonia vs Stress Index',
+        data: scatterData,
+        backgroundColor: 'rgba(239, 68, 68, 0.7)',
+        pointRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Amonia (ppm)'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Stress Index'
+          },
+          min: 0,
+          max: 0.5
         }
-        
-        .chart-container {
-            background-color: #f9fafb;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            height: 300px;
-            position: relative;
+      }
+    }
+  });
+
+  // Bar Chart for Economics
+  const feedCost = (inputs.feedConsumption / 1000) * 8000;
+  const eggRevenue = (inputs.eggProduction / 100) * 0.06 * 25000;
+  const otherCosts = 500;
+  const profit = eggRevenue - feedCost - otherCosts;
+
+  new Chart(document.getElementById('economicChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: ['Pendapatan Telur', 'Biaya Pakan', 'Biaya Lainnya', 'Profit'],
+      datasets: [{
+        label: 'Rp per Ayam per Hari',
+        data: [eggRevenue, -feedCost, -otherCosts, profit],
+        backgroundColor: [
+          'rgba(16, 185, 129, 0.6)',
+          'rgba(239, 68, 68, 0.6)',
+          'rgba(234, 179, 8, 0.6)',
+          profit > 0 ? 'rgba(16, 185, 129, 0.6)' : 'rgba(239, 68, 68, 0.6)'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Rupiah'
+          }
         }
-        
-        .chart-container h4 {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            color: #6b7280;
-        }
-    `;
-    
-    const mlVisualizationStyles = `
-        /* Styles untuk ML visualization */
-        .ml-analysis-section {
-            background-color: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .ml-analysis-section h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #1f2937;
-        }
-        
-        .ml-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-        
-        .ml-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background-color: #5046e5;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .ml-badge i {
-            font-size: 16px;
-        }
-        
-        .ml-description {
-            font-size: 14px;
-            color: #6b7280;
-        }
-        
-        .interaction-chart-container,
-        .feature-chart-container {
-            height: 350px;
-        }
-        
-        .ml-prediction-container {
-            background-color: #f9fafb;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            height: 400px;
-            position: relative;
-            margin-top: 20px;
-        }
-        
-        .ml-prediction-container h4 {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 16px;
-            color: #4b5563;
-        }
-        
-        .chart-note {
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 12px;
-            color: #9ca3af;
-            font-style: italic;
-        }
-        
-        @media (max-width: 1024px) {
-            .analysis-charts {
-                grid-template-columns: 1fr;
-            }
-            
-            .chart-container, 
-            .ml-prediction-container {
-                height: 400px;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = advancedAnalysisStyles + mlVisualizationStyles;
-    document.head.appendChild(styleElement);
+      }
+    }
+  });
 }
 
-// Tambahkan ini ke dalam fungsi showDashboardWithAdvancedAnalysis(), setelah membuat elemen visualisasi ML
-console.log('Dashboard created');
-console.log('ML Analysis:', mlAnalysis);
-
-// Debugging helper
-window.addEventListener('error', function(event) {
-    console.error('JS Error:', event.message, 'at', event.filename, ':', event.lineno);
+// Jalankan render saat halaman siap
+window.addEventListener('load', function () {
+  renderComprehensiveAnalysisCharts();
 });
 
-function showDashboardWithAdvancedAnalysis() {
-    // Sembunyikan form input
-    formSection.style.display = 'none';
-    
-    // Ambil nilai input dari form
-    const inputs = getFormInputs();
-    
-    // Hitung indeks stress menggunakan model
-    const stressIndex = stressModel ? stressModel.predict(inputs) : 0.26;
-    
-    // Analisis komprehensif dengan machine learning
-    const mlAnalysis = mlModel ? mlModel.analyze(inputs) : {
-        stressIndex: stressIndex,
-        healthScores: {
-            environmentalScore: 70,
-            welfareScore: 75,
-            productivityScore: 80,
-            feedEfficiencyScore: 78,
-            eggQualityScore: 82,
-            healthIndex: 75
-        },
-        predictions: {
-            nextWeekProduction: inputs.eggProduction - 1,
-            mortalityRisk: 'Rendah',
-            returnOnInvestment: 15.5
-        }
-    };
-    
-    // Buat elemen dashboard dasar
-    const dashboardHTML = createDashboardHTML();
-    
-    // Tambahkan dashboard setelah info card
-    const infoCard = document.querySelector('.info-card');
-    if (!infoCard) {
-        console.error('Info card not found!');
-        return;
-    }
-    
-    const dashboardContainer = document.createElement('div');
-    dashboardContainer.id = 'dashboardContainer';
-    dashboardContainer.innerHTML = dashboardHTML;
-    infoCard.insertAdjacentElement('afterend', dashboardContainer);
-    
-    // Tambahkan konten analisis komprehensif dalam bentuk teks
-    const analysisHTML = `
-        <div class="advanced-analysis-section">
-            <h3>Analisis Komprehensif</h3>
-            <div class="summary-cards">
-                <div class="summary-card">
-                    <h4>Skor Kesehatan</h4>
-                    <div class="summary-content">
-                        <p><strong>Lingkungan:</strong> ${mlAnalysis.healthScores.environmentalScore}/100</p>
-                        <p><strong>Kesejahteraan:</strong> ${mlAnalysis.healthScores.welfareScore}/100</p>
-                        <p><strong>Produktivitas:</strong> ${mlAnalysis.healthScores.productivityScore}/100</p>
-                        <p><strong>Efisiensi Pakan:</strong> ${mlAnalysis.healthScores.feedEfficiencyScore}/100</p>
-                        <p><strong>Kualitas Telur:</strong> ${mlAnalysis.healthScores.eggQualityScore}/100</p>
-                        <p><strong>Indeks Kesehatan:</strong> ${mlAnalysis.healthScores.healthIndex}/100</p>
-                    </div>
-                </div>
-                <div class="summary-card">
-                    <h4>Prediksi</h4>
-                    <div class="summary-content">
-                        <p><strong>Produksi Minggu Depan:</strong> ${mlAnalysis.predictions.nextWeekProduction.toFixed(1)}%</p>
-                        <p><strong>Risiko Kematian:</strong> ${mlAnalysis.predictions.mortalityRisk}</p>
-                        <p><strong>ROI Estimasi:</strong> ${mlAnalysis.predictions.returnOnInvestment}%</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Tambahkan analisis tanpa grafik
-    const analysisContainer = document.createElement('div');
-    analysisContainer.id = 'advancedAnalysisContainer';
-    analysisContainer.innerHTML = analysisHTML;
-    
-    // Tempatkan setelah tren chart
-    const trendChart = document.querySelector('.trend-chart');
-    if (trendChart) {
-        trendChart.insertAdjacentElement('afterend', analysisContainer);
-    } else {
-        console.error('Trend chart not found!');
-        dashboardContainer.insertAdjacentElement('beforeend', analysisContainer);
-    }
-    
-    // Inisialisasi grafik dasar
-    initializeHealthChart();
-    
-    // Inisialisasi stress gauge dengan warna yang sesuai
-    initializeStressGauge();
-    updateStressGaugeColors(mlAnalysis.stressIndex);
-}
-
-function addAdvancedStyles() {
-    const advancedAnalysisStyles = `
-        /* Styles untuk advanced analysis */
-        .advanced-analysis-section {
-            background-color: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .advanced-analysis-section h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #1f2937;
-        }
-        
-        .summary-cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        .summary-card {
-            background-color: #f9fafb;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
-        
-        .summary-card h4 {
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: #1f2937;
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 10px;
-        }
-        
-        .summary-content p {
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #4b5563;
-        }
-        
-        .summary-content p strong {
-            color: #1f2937;
-        }
-        
-        @media (max-width: 768px) {
-            .summary-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    `;
-    
-    const styleElement = document.createElement('style');
-    styleElement.textContent = advancedAnalysisStyles;
-    document.head.appendChild(styleElement);
-}
-
-function showInputForm() {
-    // Hapus dashboard jika ada
-    const dashboardContainer = document.getElementById('dashboardContainer');
-    if (dashboardContainer) {
-        dashboardContainer.remove();
-    }
-    
-    // Hapus container analisis lanjutan
-    const advancedContainer = document.getElementById('advancedAnalysisContainer');
-    if (advancedContainer) {
-        advancedContainer.remove();
-    }
-    
-    // Hapus container analisis ML
-    const mlContainer = document.getElementById('mlAnalysisContainer');
-    if (mlContainer) {
-        mlContainer.remove();
-    }
-    
-    // Tampilkan kembali form input
-    formSection.style.display = 'block';
-}
-
-// Tambahkan di awal file atau di fungsi initialize
-console.log = function(message) {
-    // Simpan log asli
-    const originalLog = console.log;
-    
-    // Output ke console
-    originalLog.apply(console, arguments);
-    
-    // Buat elemen log jika belum ada
-    if (!document.getElementById('debugLog')) {
-        const debugLog = document.createElement('div');
-        debugLog.id = 'debugLog';
-        debugLog.style.cssText = 'position: fixed; bottom: 0; right: 0; width: 300px; height: 200px; overflow: auto; background: rgba(0,0,0,0.8); color: white; padding: 10px; font-family: monospace; z-index: 9999;';
-        document.body.appendChild(debugLog);
-    }
-    
-    // Tambahkan pesan ke log
-    const log = document.getElementById('debugLog');
-    const entry = document.createElement('div');
-    entry.textContent = typeof message === 'object' ? JSON.stringify(message) : message;
-    log.appendChild(entry);
-    log.scrollTop = log.scrollHeight;
-};
